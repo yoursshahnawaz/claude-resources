@@ -6,16 +6,22 @@ A collection of Claude Code custom slash commands — drop any file from `comman
 
 | Command | File | What it does |
 |---------|------|--------------|
-| `/repo-audit` | `commands/repo-audit.md` | Full security + performance audit of the current repo — produces a prioritized findings report and offers to apply fixes interactively |
+| `/repo-audit` | `commands/repo-audit.md` | Full security + performance audit — prioritized findings report, then interactive fix prompt |
+| `/tech-debt` | `commands/tech-debt.md` | Scans for dead code, duplication, complexity, and TODO markers — produces a prioritized backlog with effort estimates |
+| `/simplify-file` | `commands/simplify-file.md` | Targets a single file, identifies over-engineering, presents a rewrite plan, then applies it |
+| `/dep-audit` | `commands/dep-audit.md` | Checks dependencies for CVEs, outdated versions, and unused packages — generates upgrade commands |
 
 ## Usage
 
 ```bash
-# Copy a command into your project
-cp commands/repo-audit.md your-project/.claude/commands/repo-audit.md
+# Copy one or all commands into your project
+cp commands/*.md your-project/.claude/commands/
 
 # Then in Claude Code
 /repo-audit
+/tech-debt
+/simplify-file src/utils/helper.ts
+/dep-audit
 ```
 
-Claude will explore the codebase with parallel agents, return a structured report grouped by severity, then ask which findings you want fixed.
+Each command explores the codebase, returns a structured report, then asks what you want to action.
